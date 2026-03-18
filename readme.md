@@ -12,6 +12,8 @@
 
 ### Backend (/backend)
 
+
+
 - Framework: Express.js (Next-gen version 5.x).
 - Database & ORM: Prisma with PostgreSQL.
 - Authentication: JWT (JSON Web Tokens) and Argon2 for secure password hashing.
