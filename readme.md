@@ -1,3 +1,5 @@
+
+
 ## Core Stack
 
 - Monorepo: Modular structure with shared packages (packages/) for schema, API gateway, and configuration.
