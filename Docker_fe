@@ -26,6 +26,7 @@ WORKDIR /app/packages/schema
 RUN npm install
 COPY .env /app/frontend/meradhan/
 WORKDIR /app/frontend/meradhan
-RUN npm install &&  npm run build 
+RUN npm install  
+RUN npm run build 
 EXPOSE 4002
 CMD ["npm","run","start"]
