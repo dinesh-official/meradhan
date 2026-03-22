@@ -1,21 +1,32 @@
 FROM node:20-alpine
 
-RUN apk add --no-cache
-python3
-make
-g++
-cairo-dev
-pango-dev
-jpeg-dev
-giflib-dev
-librsvg-dev
+# Install system dependencies (Alpine)
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    cairo-dev \
+    pango-dev \
+    jpeg-dev \
+    giflib-dev \
+    librsvg-dev
 
+# Set working directory
 WORKDIR /app
 
+# Copy package files (for caching)
+COPY package*.json ./
+
+# Install root dependencies
+RUN npm install
+
+# Copy full project
 COPY . .
 
-COPY .env /app/packages/
+# Copy env file (make sure .env exists in root)
+COPY .env /app/frontend/meradhan/.env
 
+# Install dependencies for all packages
 WORKDIR /app/packages/apiGateway
 RUN npm install
 
@@ -28,11 +39,12 @@ RUN npm install
 WORKDIR /app/packages/schema
 RUN npm install
 
-COPY .env /app/frontend/meradhan/
-
+# Build frontend
 WORKDIR /app/frontend/meradhan
 RUN npm install && npm run build
 
+# Expose port
 EXPOSE 4002
 
+# Start app
 CMD ["npm","run","start"]
