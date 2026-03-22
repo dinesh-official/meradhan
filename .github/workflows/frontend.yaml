@@ -208,7 +208,7 @@ jobs:
           DOCKER_FILE : Docker_fe
         run: |
           echo $REGISTRY/$REPOSITORY:$IMAGE_TAG 
-          docker build -f $Docker_fe -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker build -f $DOCKER_FILE -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
 
