@@ -1,19 +1,19 @@
-FROM node:20-alpine
-
-RUN apk add RUN apt-get update && apt-get install -y \
-    python3 \
-    make \
-    g++ \
-    build-essential \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libjpeg-dev \
-    libgif-dev \
-    librsvg2-dev \
-    && rm -rf /var/lib/apt/lists/*
-
+FROM node:20
 
 COPY . /app
+
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  libcairo2-dev \
+  libpango1.0-dev \
+  libjpeg-dev \
+  libgif-dev \
+  librsvg2-dev \
+  python3 \
+  make \
+  g++ \
+  && rm -rf /var/lib/apt/lists/*
+
 
 COPY .env /app/packages/
 WORKDIR /app/packages/apiGateway
@@ -26,7 +26,7 @@ WORKDIR /app/packages/schema
 RUN npm install
 COPY .env /app/frontend/meradhan/
 WORKDIR /app/frontend/meradhan
-RUN npm install  
+RUN npm install 
 RUN npm run build 
 EXPOSE 4002
 CMD ["npm","run","start"]
