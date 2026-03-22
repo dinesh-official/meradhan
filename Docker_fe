@@ -1,50 +1,31 @@
 FROM node:20-alpine
 
-# Install system dependencies (Alpine)
-RUN apk add --no-cache \
+RUN apk add RUN apt-get update && apt-get install -y \
     python3 \
     make \
     g++ \
-    cairo-dev \
-    pango-dev \
-    jpeg-dev \
-    giflib-dev \
-    librsvg-dev
+    build-essential \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    librsvg2-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
-WORKDIR /app
 
-# Copy package files (for caching)
-COPY package*.json ./
+COPY . /app
 
-# Install root dependencies
-RUN npm install
-
-# Copy full project
-COPY . .
-
-# Copy env file (make sure .env exists in root)
-COPY .env /app/frontend/meradhan/.env
-
-# Install dependencies for all packages
+COPY .env /app/packages/
 WORKDIR /app/packages/apiGateway
 RUN npm install
-
 WORKDIR /app/packages/config
 RUN npm install
-
 WORKDIR /app/packages/kyc-providers
 RUN npm install
-
 WORKDIR /app/packages/schema
 RUN npm install
-
-# Build frontend
+COPY .env /app/frontend/meradhan/
 WORKDIR /app/frontend/meradhan
-RUN npm install && npm run build
-
-# Expose port
+RUN npm install &&  npm run build 
 EXPOSE 4002
-
-# Start app
 CMD ["npm","run","start"]
