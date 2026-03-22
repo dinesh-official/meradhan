@@ -210,7 +210,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: prod_tsk_be-revision1.json
+          task-definition: prod_tsk_be.json
           cluster: prod_cluster
           service: prod-tsk-be-svc
           force-new-deployment: true
