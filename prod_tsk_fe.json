@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:203918855762:task-definition/prod_tsk_fe:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:203918855762:task-definition/prod_tsk_fe:11",
     "containerDefinitions": [
         {
             "name": "prod_cont_fe",
@@ -15,10 +15,8 @@
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -36,7 +34,7 @@
     "taskRoleArn": "arn:aws:iam::203918855762:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::203918855762:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 11,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -83,7 +81,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2026-03-22T09:49:32.978Z",
+    "registeredAt": "2026-03-22T14:51:49.202Z",
     "registeredBy": "arn:aws:iam::203918855762:root",
     "enableFaultInjection": false,
     "tags": []
