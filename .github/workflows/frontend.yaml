@@ -5,7 +5,7 @@ name: Prod_md_fe
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
