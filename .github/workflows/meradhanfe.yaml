@@ -202,7 +202,7 @@ jobs:
       - name: Build, Tag & Push Docker Image
         env:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          REPOSITORY: prod-meradhan-ui
+          REPOSITORY: prod-fe
           IMAGE_TAG: latest
         run: |
           docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -212,7 +212,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: meradhan-fe-task.json
+          task-definition: prod_tsk_fe-revision1.json
           cluster: prod-cluster
-          service: meradhan-ui-prod
+          service: prod_tsk_fe-svc
           force-new-deployment: true
