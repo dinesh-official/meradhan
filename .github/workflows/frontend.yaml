@@ -194,6 +194,7 @@ jobs:
 
       - name: Show .env
         run: cat .env
+      
 
       - name: Login to Amazon ECR
         id: login-ecr
