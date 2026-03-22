@@ -41,10 +41,10 @@ jobs:
           echo "JWT_SECRET=$JWT_SECRET" >> .env
 
           DATABASE_URL="${{ secrets.DATABASE_URL }}"
-          echo "DATABASE_URL=$DATABASE_URL" >> .env
+          echo "DATABASE_URL=postgresql://postgres:8608357738@prod.c1ugomueauz1.ap-south-1.rds.amazonaws.com:5432/postgres?sslmode=require" >> .env
 
           DIRECT_URL="${{ secrets.DIRECT_URL }}"
-          echo "DIRECT_URL=$DIRECT_URL" >> .env
+          echo "DIRECT_URL=postgresql://postgres:8608357738@prod.c1ugomueauz1.ap-south-1.rds.amazonaws.com:5432/postgres?sslmode=require" >> .env
 
           REDIS_HOST="${{ secrets.REDIS_HOST }}"
           echo "REDIS_HOST=$REDIS_HOST" >> .env
