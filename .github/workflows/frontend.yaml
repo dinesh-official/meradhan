@@ -205,8 +205,9 @@ jobs:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
           REPOSITORY: prod_md_fe
           IMAGE_TAG: latest
+          DOCKER_FILE : Docker_fe
         run: |
-          docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker build -f $Docker_fe -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
 
