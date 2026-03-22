@@ -1,6 +1,5 @@
 
-
-name: Prod_md_fe
+name: meradhan FE
 
 on:
   push:
@@ -205,10 +204,8 @@ jobs:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
           REPOSITORY: prod-fe
           IMAGE_TAG: latest
-          DOCKER_FILE : frontendDockerfile
         run: |
-          echo $REGISTRY/$REPOSITORY:$IMAGE_TAG 
-          docker build -f $DOCKER_FILE -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
 
