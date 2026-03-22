@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:203918855762:task-definition/prod_fe_task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:203918855762:task-definition/task_prod_fe:1",
     "containerDefinitions": [
         {
             "name": "prod_fe_container",
@@ -32,7 +32,7 @@
             "systemControls": []
         }
     ],
-    "family": "prod_fe_task",
+    "family": "task_prod_fe",
     "taskRoleArn": "arn:aws:iam::203918855762:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::203918855762:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
@@ -71,8 +71,8 @@
     "placementConstraints": [],
     "compatibilities": [
         "EC2",
-        "FARGATE",
-        "MANAGED_INSTANCES"
+        "MANAGED_INSTANCES",
+        "FARGATE"
     ],
     "requiresCompatibilities": [
         "FARGATE"
@@ -83,7 +83,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2026-03-22T05:27:58.557Z",
+    "registeredAt": "2026-03-22T05:33:00.273Z",
     "registeredBy": "arn:aws:iam::203918855762:root",
     "enableFaultInjection": false,
     "tags": []
