@@ -205,7 +205,7 @@ jobs:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
           REPOSITORY: prod-fe
           IMAGE_TAG: latest
-          DOCKER_FILE : Docker_fe
+          DOCKER_FILE : frontendDockerfile
         run: |
           echo $REGISTRY/$REPOSITORY:$IMAGE_TAG 
           docker build -f $DOCKER_FILE -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -215,7 +215,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: task_prod_fe.json
+          task-definition: prod_tsk_fe-revision1.json
           cluster: prod-cluster
-          service: task_prod_fe-service-8u90m2oc
+          service: prod_tsk_fe-svc
           force-new-deployment: true
