@@ -1,6 +1,6 @@
 
 
-name: meradhan FE deploy
+name: Prod_md_fe
 
 on:
   push:
