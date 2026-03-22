@@ -8,8 +8,8 @@
             "portMappings": [
                 {
                     "name": "prod_cont_fe-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
+                    "containerPort": 4002,
+                    "hostPort": 4002,
                     "protocol": "tcp"
                 }
             ],
