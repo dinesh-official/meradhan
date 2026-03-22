@@ -214,6 +214,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: prod_tsk_fe-revision1.json
-          cluster: prod-cluster
-          service: prod_tsk_fe-svc
+          cluster: prod_cluster
+          service: prod_tsk_fe-service-x9shl00s
           force-new-deployment: true
