@@ -46,6 +46,7 @@ function ManageDematPanInputs({
               type="text"
               maxLength={10}
               value={item}
+<<<<<<< HEAD
               disabled
               adminMode
               // onChange={(e) =>
@@ -55,6 +56,17 @@ function ManageDematPanInputs({
               //     e.target.value.toUpperCase(),
               //   )
               // }
+=======
+
+
+              onChange={(e) =>
+                updateDepositoryPan(
+                  index,
+                  subIndex + 1,
+                  e.target.value.toUpperCase(),
+                )
+              }
+>>>>>>> 9dd9dbd (Initial commit)
             />
 
             {/* Icons — only if isJoined is enabled */}

@@ -31,9 +31,14 @@ jobs:
           echo "CBRICS_ENV=PROD" >> .env
 
           # Secrets
+<<<<<<< HEAD
           # NEXT_PUBLIC_GRAPHQL_KEY="${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}"
           echo "GRAPHQL_KEY=${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}" >> .env
 
+=======
+          NEXT_PUBLIC_GRAPHQL_KEY="${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}"
+          echo "GRAPHQL_KEY=$NEXT_PUBLIC_GRAPHQL_KEY" >> .env
+>>>>>>> 9dd9dbd (Initial commit)
 
           STRAPI_API_TOKEN="${{ secrets.STRAPI_API_TOKEN }}"
           echo "STRAPI_API_TOKEN=$STRAPI_API_TOKEN" >> .env

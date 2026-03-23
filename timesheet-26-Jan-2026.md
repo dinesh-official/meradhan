@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Developer Timesheet
 
 **Developer Name:** Sourav  
@@ -18,3 +19,6 @@
 | 7:00 pm | 8:00 pm | | | |
 | 8:00 pm | 9:00 pm | | | |
 
+=======
+PGPASSWORD="AWSaws198" psql -h stage.cta0mwio0u7w.ap-south-1.rds.amazonaws.com -U postgres -d meradhan_database
+>>>>>>> 9dd9dbd (Initial commit)

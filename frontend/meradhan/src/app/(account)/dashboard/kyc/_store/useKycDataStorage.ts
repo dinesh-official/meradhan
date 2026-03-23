@@ -6,6 +6,10 @@
 
 import { MatchResult } from "@/global/utils/match_name";
 import {
+<<<<<<< HEAD
+=======
+  type IKraDownloadResponse,
+>>>>>>> 9dd9dbd (Initial commit)
   IPANKycVerifyResponse,
   ISignKycVerifyResponse,
 } from "@root/apiGateway";
@@ -33,6 +37,12 @@ export interface FileData<T> {
 
 export interface Step1Data {
   pan: PanData<IPANKycVerifyResponse["responseData"]>;
+<<<<<<< HEAD
+=======
+  kraResponse: IKraDownloadResponse | null;
+  /** When true, user chose "Use Existing KYC Details" so we skip Aadhar steps */
+  usedExistingKra: boolean;
+>>>>>>> 9dd9dbd (Initial commit)
   aadhar: string;
   gender: string;
   face: FileData<IPANKycVerifyResponse["responseData"]>;
@@ -84,6 +94,11 @@ export type QuestionnaireData = z.infer<schema["riskProfileDataSchema"]>;
 // 🗂️ Root Type: KYC Data Storage
 // ==========================
 export interface KycDataStorage {
+<<<<<<< HEAD
+=======
+  /** PDF Application Type: Re-KYC → UPDATE, first-time KYC → NEW (persisted with KYC progress) */
+  kycApplicationType?: "NEW" | "UPDATE";
+>>>>>>> 9dd9dbd (Initial commit)
   stepIndex: number;
   names: {
     fullNameAsPerPan: string;
@@ -105,6 +120,10 @@ export interface KycDataStorage {
 // 🧩 Initial Default Data
 // ==========================
 const initData: KycDataStorage = {
+<<<<<<< HEAD
+=======
+  kycApplicationType: undefined,
+>>>>>>> 9dd9dbd (Initial commit)
   stepIndex: 0,
   names: {
     fullNameAsPerPan: "",
@@ -123,6 +142,11 @@ const initData: KycDataStorage = {
       isFatca: false,
       checkKycKraConsent: false,
     },
+<<<<<<< HEAD
+=======
+    kraResponse: null,
+    usedExistingKra: false,
+>>>>>>> 9dd9dbd (Initial commit)
     aadhar: "",
     gender: "",
     face: {
@@ -223,6 +247,10 @@ const initData: KycDataStorage = {
 export const useKycDataStorage = create<{
   state: KycDataStorage;
   setState: (state: KycDataStorage) => void;
+<<<<<<< HEAD
+=======
+  setKycApplicationType: (type: "NEW" | "UPDATE") => void;
+>>>>>>> 9dd9dbd (Initial commit)
   updateStep: <K extends keyof KycDataStorage>(
     step: K,
     data: KycDataStorage[K],
@@ -235,6 +263,12 @@ export const useKycDataStorage = create<{
 
   // step 1
   setStep1PanData: (Key: keyof Step1Data["pan"], data: any) => void;
+<<<<<<< HEAD
+=======
+  setKraResponse: (data: IKraDownloadResponse | null) => void;
+  clearKraResponse: () => void;
+  setUsedExistingKra: (value: boolean) => void;
+>>>>>>> 9dd9dbd (Initial commit)
   setStep1NameMismatchDeclaration: (
     data: Step1Data["nameMismatchDeclaration"],
   ) => void;
@@ -269,6 +303,13 @@ export const useKycDataStorage = create<{
   setStep6Data: (Key: keyof KycDataStorage["step_6"], data: any) => void;
 }>((set) => ({
   state: initData,
+<<<<<<< HEAD
+=======
+  setKycApplicationType: (type) =>
+    set((prev) => ({
+      state: { ...prev.state, kycApplicationType: type },
+    })),
+>>>>>>> 9dd9dbd (Initial commit)
   setNames: (key: keyof KycDataStorage["names"], data: string) =>
     set({
       state: {
@@ -345,6 +386,43 @@ export const useKycDataStorage = create<{
       },
     })),
 
+<<<<<<< HEAD
+=======
+  setKraResponse: (data) =>
+    set((prev) => ({
+      state: {
+        ...prev.state,
+        step_1: {
+          ...prev.state.step_1,
+          kraResponse: data,
+        },
+      },
+    })),
+
+  clearKraResponse: () =>
+    set((prev) => ({
+      state: {
+        ...prev.state,
+        step_1: {
+          ...prev.state.step_1,
+          kraResponse: null,
+          usedExistingKra: false,
+        },
+      },
+    })),
+
+  setUsedExistingKra: (value) =>
+    set((prev) => ({
+      state: {
+        ...prev.state,
+        step_1: {
+          ...prev.state.step_1,
+          usedExistingKra: value,
+        },
+      },
+    })),
+
+>>>>>>> 9dd9dbd (Initial commit)
   setStep1NameMismatchDeclaration: (data) =>
     set((prev) => ({
       state: {

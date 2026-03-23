@@ -248,3 +248,12 @@ export const riskProfileDataSchema = z.array(
     ans: z.string().min(1, "Answer is required"),
   }),
 );
+<<<<<<< HEAD
+=======
+
+
+export const kraVerifyRequestSchema = z.object({
+  pan: z.string().min(1, "PAN is required"),
+  dob: z.string().min(1, "Date of birth is required"),
+});
+>>>>>>> 9dd9dbd (Initial commit)

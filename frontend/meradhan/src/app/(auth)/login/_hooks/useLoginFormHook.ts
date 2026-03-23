@@ -104,7 +104,11 @@ export const useLoginFormHook = () => {
         dataStore.setType("password");
       } else {
         dataStore.setType("otp");
+<<<<<<< HEAD
         handleSendOtp();
+=======
+        // handleSendOtp();
+>>>>>>> 9dd9dbd (Initial commit)
       }
       trackActivity("login", { reason: "Create login request" });
     },
@@ -206,7 +210,11 @@ export const useLoginFormHook = () => {
       signinApi.signInVerifyOtp({
         identity,
         otp: state.otp,
+<<<<<<< HEAD
         token: sendOtpMutation.data?.responseData?.token || "",
+=======
+        token: sendOtpMutation.data?.responseData?.token || requestLoginMutation.data?.responseData.token || "",
+>>>>>>> 9dd9dbd (Initial commit)
         value: state.emailOrPhoneNo,
       }),
     onSuccess: (data) => {
@@ -270,9 +278,16 @@ export const useLoginFormHook = () => {
   // ---------------------------------
 
   /**
+<<<<<<< HEAD
    * Handle Login Request (Check user)
    */
   const handleSignInRequest = () => {
+=======
+   * Handle Login Request (Check user) — guarded to prevent double submit
+   */
+  const handleSignInRequest = () => {
+    if (requestLoginMutation.isPending) return;
+>>>>>>> 9dd9dbd (Initial commit)
     const { valid, message } = validateIfEmailOrPhoneNo(state.emailOrPhoneNo);
     if (!valid) return setErrors({ ...errors, emailOrPhone: message });
     dataStore.setErrorMessage("");
@@ -281,9 +296,16 @@ export const useLoginFormHook = () => {
   };
 
   /**
+<<<<<<< HEAD
    * Handle OTP Send
    */
   const handleSendOtp = () => {
+=======
+   * Handle OTP Send (guarded to prevent double send)
+   */
+  const handleSendOtp = () => {
+    if (sendOtpMutation.isPending) return;
+>>>>>>> 9dd9dbd (Initial commit)
     const { valid, message } = validateIfEmailOrPhoneNo(state.emailOrPhoneNo);
     if (!valid) return setErrors({ ...errors, emailOrPhone: message });
     dataStore.setErrorMessage("");

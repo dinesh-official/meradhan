@@ -153,6 +153,14 @@ function ProfileViewCard({
                       )}
                   </p>
                 )}
+<<<<<<< HEAD
+=======
+                {profile.kraStatus && (
+                  <p className="text-[#666666] text-xs font-medium">
+                    KRA: {String(profile.kraStatus).replace(/_/g, " ")}
+                  </p>
+                )}
+>>>>>>> 9dd9dbd (Initial commit)
               </>
             )}
           </div>

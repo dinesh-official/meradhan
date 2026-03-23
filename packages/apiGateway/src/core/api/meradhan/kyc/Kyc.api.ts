@@ -18,6 +18,10 @@ import type {
   ISignKycVerifyResponse,
   IStoreKycGETResponse,
   IStoreKycSETResponse,
+<<<<<<< HEAD
+=======
+  IKraVerifyResponse,
+>>>>>>> 9dd9dbd (Initial commit)
   KRAResponse,
   RescheduleKraResponse,
 } from "./Kyc.response";
@@ -63,6 +67,21 @@ export class CustomerKycApi {
     return data;
   }
 
+<<<<<<< HEAD
+=======
+  async createKraVerifyRequest(
+    body: { pan: string; dob: string },
+    config?: AxiosRequestConfig,
+  ) {
+    const { data } = await this.apiClient.post<IKraVerifyResponse>(
+      "/customer/kyc/kra/request",
+      body,
+      config,
+    );
+    return data;
+  }
+
+>>>>>>> 9dd9dbd (Initial commit)
   async requestAadharVerification(
     payload: z.infer<typeof this.schema.kycAadhaarInfoDataSchema>,
     config?: AxiosRequestConfig,

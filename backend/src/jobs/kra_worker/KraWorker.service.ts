@@ -72,12 +72,47 @@ export class KraWorkerService {
         where: { id: kycDataStoreId, userID: customerId },
       });
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9dd9dbd (Initial commit)
       if (!payload) {
         return;
       }
 
       const kyc = payload.data as Root;
 
+<<<<<<< HEAD
+=======
+      const isUsedKra = kyc.step_1.usedExistingKra;
+
+      if (isUsedKra) {
+        try {
+          await this.registerOnCbrics(customerId, kycDataStoreId);
+          return;
+        } catch (error) {
+          await db.dataBase.kraDataLogs.create({
+            data: {
+              requestData: {
+                customerId: customerId,
+              },
+              responseData: {
+                error: "CBRICS Registration Failed",
+                message: error?.toString(),
+              },
+              userId: customer.id,
+              kycId: kycDataStoreId,
+              stage: "FAILED_CBRICS_REGISTRATION",
+              reqTime: new Date().toISOString(),
+              resTime: new Date().toISOString(),
+            },
+          });
+          return;
+        }
+      }
+
+>>>>>>> 9dd9dbd (Initial commit)
       const res = await this.kraProcess.enquiry({
         kycdataId: kycDataStoreId,
         data: kyc,
@@ -169,6 +204,7 @@ export class KraWorkerService {
         if (isMatched) {
           await delay(5000);
           try {
+<<<<<<< HEAD
             try {
               const cbUser =
                 await cbricsManager.registerParticipant(customerId);
@@ -215,6 +251,28 @@ export class KraWorkerService {
                 },
               });
             }
+=======
+            await this.registerOnCbrics(customerId, kycDataStoreId);
+          } catch (error) {
+            await db.dataBase.kraDataLogs.create({
+              data: {
+                requestData: {
+                  customerId: customerId,
+                },
+                responseData: {
+                  error: "CBRICS Registration Failed",
+                  message: error?.toString(),
+                },
+                userId: customer.id,
+                kycId: kycDataStoreId,
+                stage: "FAILED_CBRICS_REGISTRATION",
+                reqTime: new Date().toISOString(),
+                resTime: new Date().toISOString(),
+              },
+            });
+          } try {
+            await this.registerOnCbrics(customerId, kycDataStoreId);
+>>>>>>> 9dd9dbd (Initial commit)
           } catch (error) {
             await db.dataBase.kraDataLogs.create({
               data: {
@@ -300,8 +358,62 @@ export class KraWorkerService {
       throw err;
     }
   }
+<<<<<<< HEAD
 }
 
+=======
+  async registerOnCbrics(customerId: number, kycDataStoreId: number) {
+    try {
+      const cbUser =
+        await cbricsManager.registerParticipant(customerId);
+      await db.dataBase.customerProfileDataModel.update({
+        where: { id: customerId },
+        data: {
+          kycStatus: "VERIFIED",
+          kraStatus: "VERIFIED",
+          verifyDate: new Date(),
+        },
+      });
+      await db.dataBase.kraDataLogs.create({
+        data: {
+          requestData: {
+            customerId: customerId,
+          },
+          responseData: cbUser,
+          userId: customerId,
+          kycId: kycDataStoreId,
+          stage: "CBRICS_REGISTER_SUCCESS",
+          reqTime: new Date().toISOString(),
+          resTime: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      const err = error as AxiosError;
+      await db.dataBase.customerProfileDataModel.update({
+        where: { id: customerId },
+        data: {
+          kraStatus: "CBRICS PENDING",
+        },
+      });
+      await db.dataBase.kraDataLogs.create({
+        data: {
+          requestData: {
+            customerId: customerId,
+          },
+          responseData: err.response?.data || err.message,
+          userId: customerId,
+          kycId: kycDataStoreId,
+          stage: "KRA COMPLETED - ERROR_CBRICS_REGISTER",
+          reqTime: new Date().toISOString(),
+          resTime: new Date().toISOString(),
+        },
+      });
+    }
+  }
+}
+
+
+>>>>>>> 9dd9dbd (Initial commit)
 type processPayload = {
   kycdataId: number;
   data: Root;

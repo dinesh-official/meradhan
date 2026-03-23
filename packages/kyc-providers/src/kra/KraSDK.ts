@@ -46,9 +46,15 @@ export class KraSDK {
     this.okraServiceUrl =
       this.env === "PROD"
         ? "https://kra.ndml.in/okra-iop/services/OkraServiceImpl"
+<<<<<<< HEAD
         : "https://pilot.kra.ndml.in/okra-iop/services/OkraServiceImpl";
 
     this.panServiceUrl = this.env === "PROD" ? "https://kra.ndml.in/sms-ws/PANServiceImplService" : "https://pilot.kra.ndml.in/sms-ws/PANServiceImplService";
+=======
+        : "https://awsapi.meradhan.co/proxy/uat/kra/okra-iop/services/OkraServiceImpl";
+
+    this.panServiceUrl = this.env === "PROD" ? "https://kra.ndml.in/sms-ws/PANServiceImplService" : "https://awsapi.meradhan.co/proxy/uat/kra/sms-ws/PANServiceImplService";
+>>>>>>> 9dd9dbd (Initial commit)
   }
 
   public async init() {
@@ -61,7 +67,11 @@ export class KraSDK {
     const xml = KraXMLBuilder.buildPasswordRequest(this.password, this.passKey);
 
     const response = await axios.post(this.okraServiceUrl, xml, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
       headers: {
         "Content-Type": "text/xml; charset=utf-8",
         SOAPAction: "getPassword",
@@ -120,7 +130,11 @@ export class KraSDK {
     });
 
     const response = await axios.post(this.panServiceUrl, xml, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
 
       headers: {
         "Content-Type": "text/xml; charset=utf-8",
@@ -159,7 +173,11 @@ export class KraSDK {
     });
 
     const response = await axios.post(this.panServiceUrl, xml, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
 
       headers: {
         "Content-Type": "text/xml; charset=utf-8",
@@ -195,7 +213,11 @@ export class KraSDK {
     });
 
     const response = await axios.post(this.panServiceUrl, xml, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
 
       headers: {
         "Content-Type": "text/xml; charset=utf-8",
@@ -230,7 +252,11 @@ export class KraSDK {
       userName: this.userName,
     });
     const response = await axios.post(this.okraServiceUrl, resultXmlPayload, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
 
       headers: {
         "Content-Type": "text/xml; charset=utf-8",
@@ -256,7 +282,11 @@ export class KraSDK {
     });
 
     const response = await axios.post(this.panServiceUrl, xml, {
+<<<<<<< HEAD
         httpsAgent: insecureAgent,
+=======
+      httpsAgent: insecureAgent,
+>>>>>>> 9dd9dbd (Initial commit)
 
       headers: {
         "Content-Type": "text/xml; charset=utf-8",

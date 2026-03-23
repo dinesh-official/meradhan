@@ -12,8 +12,13 @@ function Card({
     <div
       data-slot="card"
       className={cn(
+<<<<<<< HEAD
         "flex flex-col gap-3 md:gap-0 bg-card py-2 md:py-4 border rounded-lg border-[#E1E6E8]",
         accountMode && "px-0 py-0 lg:py-6 border-0 border-gray-200 lg:border-1",
+=======
+        "flex flex-col gap-3 bg-card py-2 md:py-4 border rounded-lg border-[#E1E6E8]",
+        accountMode && "px-0 py-0 lg:py-6 border-0 border-gray-200 lg:border",
+>>>>>>> 9dd9dbd (Initial commit)
         className
       )}
       {...rest}
@@ -81,7 +86,11 @@ function CardContent({
   return (
     <div
       data-slot="card-content chart-content-container"
+<<<<<<< HEAD
       className={cn("md:px-6 px-0", accountMode && "px-0 lg:px-6", className)}
+=======
+      className={cn("md:px-6 px-6 py-2", accountMode && "px-0 lg:px-6", className)}
+>>>>>>> 9dd9dbd (Initial commit)
       {...rest}
     />
   );

@@ -9,6 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { userSessionStore } from "@/core/auth/userSessionStore";
+<<<<<<< HEAD
+=======
+import { useMounted } from "@/hooks/useMounted";
+>>>>>>> 9dd9dbd (Initial commit)
 import { ISessionResponse } from "@root/apiGateway";
 import Image from "next/image";
 import Link from "next/link";
@@ -156,6 +160,7 @@ export function ShowUserBadge(
     lastName: string;
   } | null
 ) {
+<<<<<<< HEAD
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -174,6 +179,32 @@ export function ShowUserBadge(
           <IoIosArrowDown />
         </button>
       </DropdownMenuTrigger>
+=======
+  const mounted = useMounted();
+
+  const triggerButton = (
+    <button
+      className="flex items-center gap-1 bg-white rounded-full focus:outline-none cursor-pointer"
+      aria-label="Open user menu"
+    >
+      <Avatar>
+        <AvatarFallback aria-hidden="true">
+          {session?.firstName?.charAt(0)}
+          {session?.lastName?.charAt(0)}
+        </AvatarFallback>
+      </Avatar>
+      <IoIosArrowDown />
+    </button>
+  );
+
+  if (!mounted) {
+    return triggerButton;
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>{triggerButton}</DropdownMenuTrigger>
+>>>>>>> 9dd9dbd (Initial commit)
 
       <DropdownMenuContent
         side="bottom"

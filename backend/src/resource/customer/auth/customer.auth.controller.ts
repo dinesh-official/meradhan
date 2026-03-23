@@ -130,6 +130,11 @@ export class CustomerAuthController {
       value: payload.value,
     });
 
+<<<<<<< HEAD
+=======
+    console.log("signin request response", response);
+
+>>>>>>> 9dd9dbd (Initial commit)
     res.sendResponse({
       statusCode: HttpStatus.OK,
       responseData: response,
@@ -245,15 +250,25 @@ export class CustomerAuthController {
         emailAddress: true,
         userName: true,
         kycStatus: true,
+<<<<<<< HEAD
+=======
+        kraStatus: true,
+>>>>>>> 9dd9dbd (Initial commit)
         gender: true,
       },
     });
 
     const hasRekycExpiredFlow = session
       ? await db.dataBase.kYC_FLOW.findFirst({
+<<<<<<< HEAD
           where: { kycUserId: id, markExpired: true },
           select: { id: true },
         }).then((row) => !!row)
+=======
+        where: { kycUserId: id, markExpired: true },
+        select: { id: true },
+      }).then((row) => !!row)
+>>>>>>> 9dd9dbd (Initial commit)
       : false;
 
     res.sendResponse({

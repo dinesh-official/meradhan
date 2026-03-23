@@ -4,7 +4,11 @@ WORKDIR /app
 
 # Copy files
 COPY . .
+<<<<<<< HEAD
 COPY .env /app/.env
+=======
+
+>>>>>>> 9dd9dbd (Initial commit)
 WORKDIR /app/packages/apiGateway
 RUN bun install
 WORKDIR /app/packages/config

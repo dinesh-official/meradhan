@@ -59,6 +59,10 @@ model CustomerProfileDataModel {
     VerifiedBy    Int?
     verifyDate    DateTime?
     kycSubmitDate DateTime?
+<<<<<<< HEAD
+=======
+    useKraKyc     Boolean   @default(false)
+>>>>>>> 9dd9dbd (Initial commit)
 
     // One-to-one relations
     riskProfile                 CustomersRiskProfileModel? @relation(fields: [customersRiskProfileModelId], references: [id], onDelete: Cascade)

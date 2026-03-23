@@ -69,6 +69,13 @@ const nextConfig: NextConfig = {
         source: "/sitemap-main.xml",
         destination: "/sitemap-main",
       },
+<<<<<<< HEAD
+=======
+      {
+        source: "/api/meradhan/kra/uat/:path*",
+        destination: `https://pilot.kra.ndml.in/:path*`,
+      },
+>>>>>>> 9dd9dbd (Initial commit)
     ];
   },
 };

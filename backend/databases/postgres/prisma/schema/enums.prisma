@@ -50,6 +50,10 @@ enum Gender {
   MALE
   FEMALE
   OTHER
+<<<<<<< HEAD
+=======
+  NA
+>>>>>>> 9dd9dbd (Initial commit)
 }
 
 /// Type of depository for Demat accounts

@@ -11,6 +11,10 @@ import responseTime from "response-time";
 import { errorHandler } from "./error_handler";
 import { responseHandler } from "./response_handler";
 import type { IExpressRoute, IServer } from "./server_interface";
+<<<<<<< HEAD
+=======
+import { proxyRoutes } from "@config/proxy";
+>>>>>>> 9dd9dbd (Initial commit)
 
 type TMonitor = {
   serverMonitor?: ServerMonitorInterface;
@@ -51,6 +55,10 @@ export class ExpressServer implements IServer, IExpressRoute {
       throw new AppError("Port not set. Call createApp(port) first.");
     }
 
+<<<<<<< HEAD
+=======
+    proxyRoutes(this.app);
+>>>>>>> 9dd9dbd (Initial commit)
     // Pre Middlewares -
     // Trust proxy - required for rate limiting and proper IP detection behind proxies
     this.app.set("trust proxy", 1);
@@ -66,6 +74,7 @@ export class ExpressServer implements IServer, IExpressRoute {
       "https://api.meradhan.co", // Allow API subdomain
       "https://awscrm.meradhan.co",
       "https://aws.meradhan.co",
+<<<<<<< HEAD
       "https://spyder.meradhan.co",
       "https://dev-crm.meradhan.co",
       "https://dev-api.meradhan.co",
@@ -79,6 +88,21 @@ export class ExpressServer implements IServer, IExpressRoute {
             "http://127.0.0.1:3001",
             "http://127.0.0.1:4000",
           ]
+=======
+      "https://awsapi.meradhan.co",
+      "https://spyder.meradhan.co",
+      "https://preprod.meradhan.co",
+      "https://preprodfe.meradhan.co",
+      ...(isDevelopment
+        ? [
+          "http://localhost:3000",
+          "http://localhost:3001",
+          "http://localhost:4000",
+          "http://127.0.0.1:3000",
+          "http://127.0.0.1:3001",
+          "http://127.0.0.1:4000",
+        ]
+>>>>>>> 9dd9dbd (Initial commit)
         : []),
     ];
 
@@ -123,7 +147,11 @@ export class ExpressServer implements IServer, IExpressRoute {
     );
     this.app.use(morgan("common"));
     this.app.use(helmet());
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 9dd9dbd (Initial commit)
     // SECURITY: Do NOT serve /uploads statically - sensitive files (KYC/PII) may be stored there
     // Files should be served via:
     // 1. S3 with signed URLs (recommended for production)
@@ -149,14 +177,22 @@ export class ExpressServer implements IServer, IExpressRoute {
         });
       });
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 9dd9dbd (Initial commit)
     this.app.use(express.urlencoded({ extended: true }));
     // SECURITY: Only parse JSON globally. Text parsing should be route-specific (e.g., webhook signature verification)
     // Routes that need raw body text (like payment webhooks) should use express.text() middleware on that specific route
     this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(responseHandler);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 9dd9dbd (Initial commit)
     // Public folder is safe - only contains non-sensitive static assets (images, etc.)
     this.app.use(express.static("public"));
 

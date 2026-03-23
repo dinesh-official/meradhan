@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9dd9dbd (Initial commit)
 ## Core Stack
 
 - Monorepo: Modular structure with shared packages (packages/) for schema, API gateway, and configuration.
@@ -28,15 +31,21 @@
 - Cheerio (Web scraping).
 - XLSX & Adm-zip (Data processing).
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9dd9dbd (Initial commit)
 ### Frontend (/frontend/crm & /frontend/meradhan)
 
 - Framework: Next.js (v15.x) with App Router.
 - Library: React (v19.x).
 - State Management: Zustand and TanStack Query (React Query).
+<<<<<<< HEAD
 - we nee to test 
 
+=======
+>>>>>>> 9dd9dbd (Initial commit)
 - UI Components:
 - Radix UI (Headless components).
 - Tailwind CSS (v4.0) for styling.

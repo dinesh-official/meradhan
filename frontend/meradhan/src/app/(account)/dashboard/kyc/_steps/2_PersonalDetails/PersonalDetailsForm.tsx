@@ -36,6 +36,10 @@ function PersonalDetailsForm() {
     usePersonalDetailsFormHook();
 
   const data = state.step_2;
+<<<<<<< HEAD
+=======
+  const isFromKra = state.step_1.usedExistingKra;
+>>>>>>> 9dd9dbd (Initial commit)
 
   return (
     <Card accountMode>
@@ -45,7 +49,11 @@ function PersonalDetailsForm() {
 
       <CardContent accountMode>
         <div className="gap-3 md:gap-5 grid sm:grid-cols-2 lg:grid-cols-3">
+<<<<<<< HEAD
           {/* Marital Status */}
+=======
+          {/* Marital Status – disabled when pre-filled from KRA */}
+>>>>>>> 9dd9dbd (Initial commit)
           <LabelInput
             label="Marital Status"
             required
@@ -58,7 +66,11 @@ function PersonalDetailsForm() {
               }}
               value={data.maritalStatus}
             >
+<<<<<<< HEAD
               <SelectTrigger className="w-full">
+=======
+              <SelectTrigger className="w-full" disabled={isFromKra}>
+>>>>>>> 9dd9dbd (Initial commit)
                 <SelectValue placeholder="Select Marital Status" />
               </SelectTrigger>
               <SelectContent>
@@ -71,7 +83,11 @@ function PersonalDetailsForm() {
             </Select>
           </LabelInput>
 
+<<<<<<< HEAD
           {/* Father/Spouse Name */}
+=======
+          {/* Father/Spouse Name – disabled when pre-filled from KRA */}
+>>>>>>> 9dd9dbd (Initial commit)
           <LabelInput
             label="Father’s / Spouse Name"
             required
@@ -84,6 +100,10 @@ function PersonalDetailsForm() {
                 setStep2PersonalData("fatSpuName", e.target.value);
                 removeError("fatSpuName");
               }}
+<<<<<<< HEAD
+=======
+              disabled={isFromKra}
+>>>>>>> 9dd9dbd (Initial commit)
             />
           </LabelInput>
 
@@ -140,7 +160,11 @@ function PersonalDetailsForm() {
           </LabelInput>
 
 
+<<<<<<< HEAD
           {/* Occupation */}
+=======
+          {/* Occupation – always editable (KRA users may change selection) */}
+>>>>>>> 9dd9dbd (Initial commit)
           <LabelInput
             label="Occupation Type"
             required
@@ -173,6 +197,7 @@ function PersonalDetailsForm() {
                 required
                 error={error?.otherOccupationName?.[0]}
               >
+<<<<<<< HEAD
                 <Input type="text" value={data.otherOccupationName} maxLength={30} onChange={(e) => {
                   setStep2PersonalData("otherOccupationName", e.target.value);
                   removeError("otherOccupationName");
@@ -183,6 +208,23 @@ function PersonalDetailsForm() {
           {/* Annual Income */}
           <LabelInput
             label="Annual Gross Income"
+=======
+                <Input
+                  type="text"
+                  value={data.otherOccupationName}
+                  maxLength={30}
+                  onChange={(e) => {
+                    setStep2PersonalData("otherOccupationName", e.target.value);
+                    removeError("otherOccupationName");
+                  }}
+                />
+              </LabelInput>
+            )
+          }
+          {/* Income range – always editable (KRA users may change selection) */}
+          <LabelInput
+            label="Income Range"
+>>>>>>> 9dd9dbd (Initial commit)
             required
             error={error?.annualGrossIncome?.[0]}
           >
@@ -222,7 +264,11 @@ function PersonalDetailsForm() {
             />
           </LabelInput>
 
+<<<<<<< HEAD
           {/* Nationality */}
+=======
+          {/* Nationality – disabled when pre-filled from KRA */}
+>>>>>>> 9dd9dbd (Initial commit)
           <LabelInput
             label="Nationality"
             required
@@ -235,7 +281,11 @@ function PersonalDetailsForm() {
               }}
               value={data.nationality}
             >
+<<<<<<< HEAD
               <SelectTrigger className="w-full">
+=======
+              <SelectTrigger className="w-full" disabled={isFromKra}>
+>>>>>>> 9dd9dbd (Initial commit)
                 <SelectValue placeholder="Select Nationality" />
               </SelectTrigger>
               <SelectContent>

@@ -50,6 +50,13 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
     },
   });
 
+<<<<<<< HEAD
+=======
+  /** KRA path: no DigiLocker Aadhaar — hide placeholder Aadhaar cards */
+  const hideAadhaarSection =
+    kycStore.isSuccess && Boolean(kycStore.data?.step_1?.usedExistingKra);
+
+>>>>>>> 9dd9dbd (Initial commit)
   return (
     <div className="relative flex flex-col gap-5 mt-5">
       <div className="gap-5  flex flex-col ">
@@ -62,6 +69,10 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
             "DD MMM YYYY hh:mm:ss AA",
           )}
           kycStatus={data.kycStatus}
+<<<<<<< HEAD
+=======
+          usedExistingKra={Boolean(kycStore.data?.step_1?.usedExistingKra)}
+>>>>>>> 9dd9dbd (Initial commit)
         />
         <KYCVerificationStatusCard
           kycLevel={getLevelQuery.data || "-----"}
@@ -80,7 +91,11 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
 
       {isSuperAdmin && (
         <>
+<<<<<<< HEAD
       <StickyHeader />
+=======
+      <StickyHeader hideAadhaarSection={hideAadhaarSection} />
+>>>>>>> 9dd9dbd (Initial commit)
 
       {/* Personal Information */}
       <div className="scroll-mt-16" id="personal-info">
@@ -164,6 +179,7 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
                   ) : "-------"}
                 </p> */}
               </div>
+<<<<<<< HEAD
               <div>
                 <AdharaCard
                   name={`${data.aadhaarCard?.firstName || "----"} ${
@@ -199,6 +215,30 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
                   ) : "--------------"}
                 </p> */}
               </div>
+=======
+              {!hideAadhaarSection && (
+                <div>
+                  <AdharaCard
+                    name={`${data.aadhaarCard?.firstName || "----"} ${
+                      data.aadhaarCard?.middleName || ""
+                    } ${data.aadhaarCard?.lastName || "---"}`}
+                    gender={data.aadhaarCard?.gender || "----"}
+                    aadhaarNumberMasked={
+                      data.aadhaarCard?.aadhaarNo || "----------------"
+                    }
+                    dateOfBirth={
+                      data.aadhaarCard?.dateOfBirth
+                        ? dateTimeUtils.formatDateTime(
+                            data.aadhaarCard?.dateOfBirth,
+                            "DD/MM/YYYY",
+                          )
+                        : "--/--/----"
+                    }
+                    isVerified={data.aadhaarCard?.isVerified || false}
+                  />
+                </div>
+              )}
+>>>>>>> 9dd9dbd (Initial commit)
             </div>
           </CardContent>
         </Card>
@@ -248,6 +288,7 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
           }
         />
 
+<<<<<<< HEAD
         <AadhaarCardInfo
           name={`${data.aadhaarCard?.firstName || "----"} ${
             data.aadhaarCard?.middleName || ""
@@ -313,6 +354,75 @@ function ViewKycDataComponent({ data }: { data: CustomerByIdPayload }) {
               : "--/--/----"
           }
         />
+=======
+        {!hideAadhaarSection && (
+          <AadhaarCardInfo
+            name={`${data.aadhaarCard?.firstName || "----"} ${
+              data.aadhaarCard?.middleName || ""
+            } ${data.aadhaarCard?.lastName || "---"}`}
+            gender={data.aadhaarCard?.gender || "----"}
+            aadhaarNumber={data.aadhaarCard?.aadhaarNo || "----------------"}
+            dateOfBirth={
+              data.aadhaarCard?.dateOfBirth
+                ? dateTimeUtils.formatDateTime(
+                    data.aadhaarCard?.dateOfBirth,
+                    "DD/MM/YYYY",
+                  )
+                : "--/--/----"
+            }
+            nameVerificationStatus={areNamesMatched(
+              {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                middleName: data.middleName || undefined,
+              },
+              {
+                firstName: data.aadhaarCard?.firstName || "",
+                lastName: data.aadhaarCard?.lastName || "",
+                middleName: data.aadhaarCard?.middleName || undefined,
+              },
+            )}
+            permanentAddress={{
+              addressLine1: data.permanentAddress?.line1 || "------",
+              addressLine2: data.permanentAddress?.line2 || undefined,
+              addressLine3: data.permanentAddress?.line3 || undefined,
+              postOffice: data.permanentAddress?.postOffice || "-----",
+              district: data.permanentAddress?.cityOrDistrict || "------",
+              stateName: data.permanentAddress?.state || "------",
+              pinCode: data.permanentAddress?.pinCode || "------",
+              country: data.permanentAddress?.country || "------",
+              fullAddress: data.permanentAddress?.fullAddress || "------",
+            }}
+            currentAddress={{
+              addressLine1: data.currentAddress?.line1 || "------",
+              addressLine2: data.currentAddress?.line2 || undefined,
+              addressLine3: data.currentAddress?.line3 || undefined,
+              postOffice: data.currentAddress?.postOffice || "-----",
+              district: data.currentAddress?.cityOrDistrict || "------",
+              stateName: data.currentAddress?.state || "------",
+              pinCode: data.currentAddress?.pinCode || "------",
+              country: data.currentAddress?.country || "------",
+              fullAddress: data.currentAddress?.fullAddress || "------",
+            }}
+            verificationTimeStamp={
+              kycStore.data?.step_1?.pan?.fetchedTimestamp
+                ? dateTimeUtils.formatDateTime(
+                    kycStore.data?.step_1?.pan?.fetchedTimestamp,
+                    "DD MMM YYYY hh:mm:ss AA",
+                  )
+                : "--/--/----"
+            }
+            confirmTimeStamp={
+              kycStore.data?.step_1?.pan?.confirmPanTimestamp
+                ? dateTimeUtils.formatDateTime(
+                    kycStore.data?.step_1?.pan?.confirmPanTimestamp,
+                    "DD MMM YYYY hh:mm:ss AA",
+                  )
+                : "--/--/----"
+            }
+          />
+        )}
+>>>>>>> 9dd9dbd (Initial commit)
       </div>
 
       {/* Bank Accounts */}

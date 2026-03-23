@@ -1,7 +1,37 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
+<<<<<<< HEAD
 export type KycDataStorage = {
   step_1: {
+=======
+export type KraResponseInKyc = {
+  appPanNo: string | null
+  appName: string | null
+  appDobDt: string | null
+  appGen: string | null
+  appCorAdd1: string | null
+  appCorAdd2: string | null
+  appCorAdd3: string | null
+  appCorCity: string | null
+  appCorPincd: string | null
+  appCorState: string | null
+  appCorCtry: string | null
+  appPerAdd1: string | null
+  appPerAdd2: string | null
+  appPerAdd3: string | null
+  appPerCity: string | null
+  appPerPincd: string | null
+  appPerState: string | null
+  appPerCtry: string | null
+}
+
+export type KycDataStorage = {
+  step_1: {
+    usedExistingKra?: boolean
+    kraResponse?: KraResponseInKyc | null
+    aadhar?: string
+    gender?: string
+>>>>>>> 9dd9dbd (Initial commit)
     pan: {
       isFatca: boolean
       lastName: string
@@ -241,4 +271,9 @@ export type KycDataStorage = {
     }
   }
   stepIndex: number
+<<<<<<< HEAD
+=======
+  /** PDF Application Type: Re-KYC → UPDATE, first-time → NEW */
+  kycApplicationType?: "NEW" | "UPDATE"
+>>>>>>> 9dd9dbd (Initial commit)
 }

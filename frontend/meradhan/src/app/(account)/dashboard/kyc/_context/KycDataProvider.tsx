@@ -1,8 +1,15 @@
 "use client";
 
 import { apiClientCaller } from "@/core/connection/apiClientCaller";
+<<<<<<< HEAD
 import apiGateway from "@root/apiGateway";
 import { useMutation } from "@tanstack/react-query";
+=======
+import { useUserTracking } from "@/analytics/UserTrackingProvider";
+import useAppCookie from "@/hooks/useAppCookie.hook";
+import apiGateway from "@root/apiGateway";
+import { useMutation, useQuery } from "@tanstack/react-query";
+>>>>>>> 9dd9dbd (Initial commit)
 import {
   ReactNode,
   createContext,
@@ -10,12 +17,19 @@ import {
   useEffect,
   useState,
 } from "react";
+<<<<<<< HEAD
 import { useKycDataStorage } from "../_store/useKycDataStorage";
 import { useKycStepStore } from "../_store/useKycStepStore";
 import { BiLoaderCircle } from "react-icons/bi";
 import { useRouter } from "nextjs-toploader/app";
 import useAppCookie from "@/hooks/useAppCookie.hook";
 import { useUserTracking } from "@/analytics/UserTrackingProvider";
+=======
+import { BiLoaderCircle } from "react-icons/bi";
+import { useRouter } from "nextjs-toploader/app";
+import { useKycDataStorage } from "../_store/useKycDataStorage";
+import { useKycStepStore } from "../_store/useKycStepStore";
+>>>>>>> 9dd9dbd (Initial commit)
 
 type TCallBack = {
   exit?: boolean;
@@ -46,6 +60,19 @@ function KycDataProvider({ children }: { children: ReactNode }) {
   const kycDataStorage = useKycDataStorage();
   const kycStep = useKycStepStore();
   const { cookies } = useAppCookie();
+<<<<<<< HEAD
+=======
+
+  const customerApi = new apiGateway.crm.customer.CrmCustomerApi(apiClientCaller);
+  const profileForKycTypeQuery = useQuery({
+    queryKey: ["getProfileDataForKycApplicationType", cookies.userId],
+    queryFn: async () => {
+      const response = await customerApi.customerInfoById(Number(cookies.userId));
+      return response.data.responseData;
+    },
+    enabled: Boolean(cookies.userId),
+  });
+>>>>>>> 9dd9dbd (Initial commit)
   const { addActivity } = useUserTracking();
 
   const api = new apiGateway.meradhan.customerKycApi.CustomerKycApi(
@@ -70,7 +97,16 @@ function KycDataProvider({ children }: { children: ReactNode }) {
     onSettled: () => setIsLoading(false),
     onSuccess: (data) => {
       if (data.responseData?.data) {
+<<<<<<< HEAD
         kycDataStorage.setState(data.responseData.data);
+=======
+        const incoming = data.responseData.data;
+        const prevAppType = useKycDataStorage.getState().state.kycApplicationType;
+        kycDataStorage.setState({
+          ...incoming,
+          kycApplicationType: incoming.kycApplicationType ?? prevAppType,
+        });
+>>>>>>> 9dd9dbd (Initial commit)
         kycStep.setStep(data.responseData.step);
         kycStep.setIsComplete(data.responseData.complete || false);
       }
@@ -155,6 +191,19 @@ function KycDataProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+<<<<<<< HEAD
+=======
+  /** PDF Application Type (New vs Update): persist once from profile when not already stored in KYC JSON */
+  useEffect(() => {
+    if (!profileForKycTypeQuery.isSuccess || !profileForKycTypeQuery.data) return;
+    const { state, setKycApplicationType } = useKycDataStorage.getState();
+    if (state.kycApplicationType) return;
+    setKycApplicationType(
+      profileForKycTypeQuery.data.kycStatus === "RE_KYC" ? "UPDATE" : "NEW",
+    );
+  }, [profileForKycTypeQuery.isSuccess, profileForKycTypeQuery.data]);
+
+>>>>>>> 9dd9dbd (Initial commit)
   return (
     <KycDataContext.Provider
       value={{

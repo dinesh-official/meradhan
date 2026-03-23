@@ -15,6 +15,10 @@ export type ISignInRequestResponse = BaseResponseData<{
   id: number;
   firstName: string;
   lastName: string;
+<<<<<<< HEAD
+=======
+  token: string;
+>>>>>>> 9dd9dbd (Initial commit)
 }>;
 
 export type ISignInSendOtpResponse = BaseResponseData<{
@@ -37,6 +41,11 @@ export type ISessionResponse = BaseResponseData<{
   middleName: string;
   lastName: string;
   kycStatus: string;
+<<<<<<< HEAD
+=======
+  /** KRA verification status when KRA exists for the user (e.g. VERIFIED, PENDING, DOWNLOAD_KRA). */
+  kraStatus?: string | null;
+>>>>>>> 9dd9dbd (Initial commit)
   isRekycUnderReview?: boolean;
   /** True when user has any KYC flow with markExpired (rekyc flow). */
   hasRekycExpiredFlow?: boolean;
