@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ✅ Checkout
+      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ✅ FIXED .env CREATION (BULLETPROOF)
+      # FIXED .env CREATION (BULLETPROOF)
       - name: Create .env from GitHub Secrets
         run: |
           cat <<'EOF' > .env
@@ -95,7 +95,7 @@ jobs:
           S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
           EOF
 
-      # ✅ AWS CONFIG
+      # AWS CONFIG
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -103,15 +103,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # ✅ DEBUG (optional)
+      # DEBUG (optional)
       - name: Show .env
         run: cat .env
 
-      # ✅ ECR LOGIN
+      # ECR LOGIN
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # ✅ BUILD + PUSH
+      # BUILD + PUSH
       - name: Build, Tag & Push Docker Image
         env:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
@@ -121,7 +121,7 @@ jobs:
           docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-      # ✅ ECS DEPLOY
+      # ECS DEPLOY
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
