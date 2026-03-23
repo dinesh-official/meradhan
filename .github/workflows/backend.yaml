@@ -16,20 +16,21 @@ jobs:
       - name: Create .env from GitHub Secrets
         shell: bash
         run: |
+          cat > .env << 'EOF'
           # Static Public values
-          echo "NEXT_PUBLIC_HOST_URL=https://www.meradhan.co" > .env
-          echo "NEXT_PUBLIC_CRM_HOST_URL=https://crm.meradhan.co" >> .env
-          echo "NEXT_PUBLIC_BACKEND_HOST_URL=https://api.meradhan.co" >> .env
-          echo "NEXT_PUBLIC_BACKEND_IP_URL=http://prod-meradhan-be.prod-namespace:4000" >> .env
-          echo "NEXT_PUBLIC_STRAPI_HOST_URL=https://spyder.meradhan.co" >> .env
-          echo "NEXT_PUBLIC_DIGIO=production" >> .env
-          echo "STRAPI_API_URL=https://spyder.meradhan.co/api" >> .env
-          echo "PORT=4000" >> .env
+          NEXT_PUBLIC_HOST_URL=https://www.meradhan.co
+          NEXT_PUBLIC_CRM_HOST_URL=https://crm.meradhan.co
+          NEXT_PUBLIC_BACKEND_HOST_URL=https://api.meradhan.co
+          NEXT_PUBLIC_BACKEND_IP_URL=http://prod-meradhan-be.prod-namespace:4000
+          NEXT_PUBLIC_STRAPI_HOST_URL=https://spyder.meradhan.co
+          NEXT_PUBLIC_DIGIO=production
+          STRAPI_API_URL=https://spyder.meradhan.co/api
+          PORT=4000
+          RFQ_CBRICS_ENV=PROD
+          CBRICS_ENV=PROD
+          EOF
 
-          echo "RFQ_CBRICS_ENV=PROD" >> .env
-          echo "CBRICS_ENV=PROD" >> .env
-
-          # Secrets - Using printf with %q to properly escape special characters
+          # Append secrets safely using printf
           printf "GRAPHQL_KEY=%q\n" "${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}" >> .env
           printf "STRAPI_API_TOKEN=%q\n" "${{ secrets.STRAPI_API_TOKEN }}" >> .env
           printf "JWT_SECRET=%q\n" "${{ secrets.JWT_SECRET }}" >> .env
