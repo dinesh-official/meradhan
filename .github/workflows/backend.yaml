@@ -1,3 +1,4 @@
+
 name: backend deploy
 
 on:
@@ -82,7 +83,7 @@ jobs:
           echo "MSG91_VERIFY_TEMPLATE=$MSG91_VERIFY_TEMPLATE" >> .env
 
           SMTP_SENDER="${{ secrets.SMTP_SENDER }}"
-          echo "SMTP_SENDER=$SMTP_SENDER" >> .env
+          echo "SMTP_SENDER=\"$SMTP_SENDER\"" >> .env
 
           SMTP_HOST="${{ secrets.SMTP_HOST }}"
           echo "SMTP_HOST=$SMTP_HOST" >> .env
@@ -200,7 +201,7 @@ jobs:
       - name: Build, Tag & Push Docker Image
         env:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          REPOSITORY: prod-be
+          REPOSITORY: prod-meradhan-be
           IMAGE_TAG: latest
         run: |
           docker build -f backenddocker -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
