@@ -1,10 +1,10 @@
 
-name: meradhan FE
+name: meradhan FE deploy
 
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -30,8 +30,8 @@ jobs:
           echo "CBRICS_ENV=PROD" >> .env
 
           # Secrets
-          GRAPHQL_KEY="${{ secrets.GRAPHQL_KEY }}"
-          echo "GRAPHQL_KEY=$GRAPHQL_KEY" >> .env
+          NEXT_PUBLIC_GRAPHQL_KEY="${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}"
+          echo "GRAPHQL_KEY=$NEXT_PUBLIC_GRAPHQL_KEY" >> .env
 
           STRAPI_API_TOKEN="${{ secrets.STRAPI_API_TOKEN }}"
           echo "STRAPI_API_TOKEN=$STRAPI_API_TOKEN" >> .env
@@ -194,7 +194,6 @@ jobs:
 
       - name: Show .env
         run: cat .env
-      
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -203,7 +202,7 @@ jobs:
       - name: Build, Tag & Push Docker Image
         env:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          REPOSITORY: prod-fe
+          REPOSITORY: prod-meradhan-ui
           IMAGE_TAG: latest
         run: |
           docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -213,7 +212,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: prod_tsk_fe.json
-          cluster: prod_cluster
-          service: prod_tsk_fe
+          task-definition: meradhan-fe-task.json
+          cluster: prod-cluster
+          service: meradhan-ui-prod
           force-new-deployment: true
