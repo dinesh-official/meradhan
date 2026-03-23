@@ -16,8 +16,8 @@ jobs:
       - name: Create .env from GitHub Secrets
         shell: bash
         run: |
-          # Create .env file using a heredoc with quotes to prevent expansion
-          cat > .env << 'ENVEOF'
+          # Static values
+          cat > .env << 'EOF'
           NEXT_PUBLIC_HOST_URL=https://www.meradhan.co
           NEXT_PUBLIC_CRM_HOST_URL=https://crm.meradhan.co
           NEXT_PUBLIC_BACKEND_HOST_URL=https://api.meradhan.co
@@ -26,63 +26,83 @@ jobs:
           NEXT_PUBLIC_DIGIO=production
           STRAPI_API_URL=https://spyder.meradhan.co/api
           PORT=4000
-          RFQ_CBRICS_ENV=PROD
-          CBRICS_ENV=PROD
-          ENVEOF
-          
-          # Append secrets - using a different method to avoid any parsing issues
+          EOF
+
+          # Append secrets safely
           {
-            echo "GRAPHQL_KEY=${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}"
-            echo "STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }}"
-            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}"
-            echo "DIRECT_URL=${{ secrets.DIRECT_URL }}"
-            echo "REDIS_HOST=${{ secrets.REDIS_HOST }}"
-            echo "REDIS_PORT=${{ secrets.REDIS_PORT }}"
-            echo "KRA_USERNAME=${{ secrets.KRA_USERNAME }}"
-            echo "KRA_PASSWORD=${{ secrets.KRA_PASSWORD }}"
-            echo "KRA_PASS_KEY=${{ secrets.KRA_PASS_KEY }}"
-            echo "KRA_MOB_NO=${{ secrets.KRA_MOB_NO }}"
-            echo "KRA_OKRA_CD_MI_ID=${{ secrets.KRA_OKRA_CD_MI_ID }}"
-            echo "KRA_ENV=${{ secrets.KRA_ENV }}"
-            echo "MSG91_AUTH_KEY=${{ secrets.MSG91_AUTH_KEY }}"
-            echo "MSG91_SIGNUP_TEMPLATE=${{ secrets.MSG91_SIGNUP_TEMPLATE }}"
-            echo "MSG91_LOGIN_TEMPLATE=${{ secrets.MSG91_LOGIN_TEMPLATE }}"
-            echo "MSG91_VERIFY_TEMPLATE=${{ secrets.MSG91_VERIFY_TEMPLATE }}"
-            echo "SMTP_SENDER=${{ secrets.SMTP_SENDER }}"
-            echo "SMTP_HOST=${{ secrets.SMTP_HOST }}"
-            echo "SMTP_PORT=${{ secrets.SMTP_PORT }}"
-            echo "SMTP_USER=${{ secrets.SMTP_USER }}"
-            echo "SMTP_PASS=${{ secrets.SMTP_PASS }}"
-            echo "CBRICS_DOMAIN=${{ secrets.CBRICS_DOMAIN }}"
-            echo "CBRICS_LOGIN=${{ secrets.CBRICS_LOGIN }}"
-            echo "CBRICS_PASSWORD=${{ secrets.CBRICS_PASSWORD }}"
-            echo "RFQ_CBRICS_DOMAIN=${{ secrets.RFQ_CBRICS_DOMAIN }}"
-            echo "RFQ_CBRICS_LOGIN=${{ secrets.RFQ_CBRICS_LOGIN }}"
-            echo "RFQ_CBRICS_PASSWORD=${{ secrets.RFQ_CBRICS_PASSWORD }}"
-            echo "DIGIO_USERNAME_PASS=${{ secrets.DIGIO_USERNAME_PASS }}"
-            echo "NDSL_REQUESTOR_ID=${{ secrets.NDSL_REQUESTOR_ID }}"
-            echo "NSDL_SECRET_KEY=${{ secrets.NSDL_SECRET_KEY }}"
-            echo "CDSL_AES_KEY=${{ secrets.CDSL_AES_KEY }}"
-            echo "ENTITY_ID=${{ secrets.ENTITY_ID }}"
-            echo "AUTH_SECRET=${{ secrets.AUTH_SECRET }}"
-            echo "AUTH_GOOGLE_ID=${{ secrets.AUTH_GOOGLE_ID }}"
-            echo "AUTH_GOOGLE_SECRET=${{ secrets.AUTH_GOOGLE_SECRET }}"
-            echo "AUTH_FACEBOOK_ID=${{ secrets.AUTH_FACEBOOK_ID }}"
-            echo "AUTH_FACEBOOK_SECRET=${{ secrets.AUTH_FACEBOOK_SECRET }}"
-            echo "AUTH_MICROSOFT_ENTRA_ID_ID=${{ secrets.AUTH_MICROSOFT_ENTRA_ID_ID }}"
-            echo "AUTH_MICROSOFT_ENTRA_ID_SECRET=${{ secrets.AUTH_MICROSOFT_ENTRA_ID_SECRET }}"
-            echo "AUTH_MICROSOFT_ENTRA_ID_ISSUER=${{ secrets.AUTH_MICROSOFT_ENTRA_ID_ISSUER }}"
-            echo "RAZORPAY_KEY_ID=${{ secrets.RAZORPAY_KEY_ID }}"
-            echo "RAZORPAY_KEY_SECRET=${{ secrets.RAZORPAY_KEY_SECRET }}"
-            echo "RAZORPAY_WEBHOOK_SECRET=${{ secrets.RAZORPAY_WEBHOOK_SECRET }}"
-            echo "CDSL_MODE=${{ secrets.CDSL_MODE }}"
-            echo "NSDL_MODE=${{ secrets.NSDL_MODE }}"
-            echo "S3_ACCESS_KEY_ID=${{ secrets.S3_ACCESS_KEY_ID }}"
-            echo "S3_SECRET_ACCESS_KEY=${{ secrets.S3_SECRET_ACCESS_KEY }}"
-            echo "S3_REGION=${{ secrets.S3_REGION }}"
-            echo "S3_ENDPOINT=${{ secrets.S3_ENDPOINT }}"
-            echo "S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}"
+            printf "NEXT_PUBLIC_GRAPHQL_KEY=%s\n" "${{ secrets.NEXT_PUBLIC_GRAPHQL_KEY }}"
+            printf "GRAPHQL_KEY=%s\n" "${{ secrets.GRAPHQL_KEY }}"
+
+            printf "STRAPI_API_TOKEN=%s\n" "${{ secrets.STRAPI_API_TOKEN }}"
+            printf "JWT_SECRET=%s\n" "${{ secrets.JWT_SECRET }}"
+            printf "PASSWORD_PEPPER=%s\n" "${{ secrets.PASSWORD_PEPPER }}"
+
+            printf "DATABASE_URL=%s\n" "${{ secrets.DATABASE_URL }}"
+            printf "DIRECT_URL=%s\n" "${{ secrets.DIRECT_URL }}"
+
+            printf "REDIS_HOST=%s\n" "${{ secrets.REDIS_HOST }}"
+            printf "REDIS_PORT=%s\n" "${{ secrets.REDIS_PORT }}"
+            printf "REDIS_USERNAME=%s\n" "${{ secrets.REDIS_USERNAME }}"
+            printf "REDIS_PASSWORD=%s\n" "${{ secrets.REDIS_PASSWORD }}"
+
+            printf "CBRICS_ENV=%s\n" "${{ secrets.CBRICS_ENV }}"
+            printf "RFQ_CBRICS_ENV=%s\n" "${{ secrets.RFQ_CBRICS_ENV }}"
+
+            printf "KRA_USERNAME=%s\n" "${{ secrets.KRA_USERNAME }}"
+            printf "KRA_PASSWORD=%s\n" "${{ secrets.KRA_PASSWORD }}"
+            printf "KRA_PASS_KEY=%s\n" "${{ secrets.KRA_PASS_KEY }}"
+            printf "KRA_MOB_NO=%s\n" "${{ secrets.KRA_MOB_NO }}"
+            printf "KRA_OKRA_CD_MI_ID=%s\n" "${{ secrets.KRA_OKRA_CD_MI_ID }}"
+            printf "KRA_ENV=%s\n" "${{ secrets.KRA_ENV }}"
+
+            printf "MSG91_AUTH_KEY=%s\n" "${{ secrets.MSG91_AUTH_KEY }}"
+            printf "MSG91_SIGNUP_TEMPLATE=%s\n" "${{ secrets.MSG91_SIGNUP_TEMPLATE }}"
+            printf "MSG91_LOGIN_TEMPLATE=%s\n" "${{ secrets.MSG91_LOGIN_TEMPLATE }}"
+            printf "MSG91_VERIFY_TEMPLATE=%s\n" "${{ secrets.MSG91_VERIFY_TEMPLATE }}"
+
+            printf "SMTP_SENDER=%s\n" "${{ secrets.SMTP_SENDER }}"
+            printf "SMTP_HOST=%s\n" "${{ secrets.SMTP_HOST }}"
+            printf "SMTP_PORT=%s\n" "${{ secrets.SMTP_PORT }}"
+            printf "SMTP_USER=%s\n" "${{ secrets.SMTP_USER }}"
+            printf "SMTP_PASS=%s\n" "${{ secrets.SMTP_PASS }}"
+
+            printf "CBRICS_DOMAIN=%s\n" "${{ secrets.CBRICS_DOMAIN }}"
+            printf "CBRICS_LOGIN=%s\n" "${{ secrets.CBRICS_LOGIN }}"
+            printf "CBRICS_PASSWORD=%s\n" "${{ secrets.CBRICS_PASSWORD }}"
+
+            printf "RFQ_CBRICS_DOMAIN=%s\n" "${{ secrets.RFQ_CBRICS_DOMAIN }}"
+            printf "RFQ_CBRICS_LOGIN=%s\n" "${{ secrets.RFQ_CBRICS_LOGIN }}"
+            printf "RFQ_CBRICS_PASSWORD=%s\n" "${{ secrets.RFQ_CBRICS_PASSWORD }}"
+
+            printf "DIGIO_USERNAME_PASS=%s\n" "${{ secrets.DIGIO_USERNAME_PASS }}"
+
+            printf "NDSL_REQUESTOR_ID=%s\n" "${{ secrets.NDSL_REQUESTOR_ID }}"
+            printf "NSDL_SECRET_KEY=%s\n" "${{ secrets.NSDL_SECRET_KEY }}"
+            printf "NSDL_MODE=%s\n" "${{ secrets.NSDL_MODE }}"
+
+            printf "CDSL_AES_KEY=%s\n" "${{ secrets.CDSL_AES_KEY }}"
+            printf "CDSL_MODE=%s\n" "${{ secrets.CDSL_MODE }}"
+
+            printf "ENTITY_ID=%s\n" "${{ secrets.ENTITY_ID }}"
+
+            printf "AUTH_SECRET=%s\n" "${{ secrets.AUTH_SECRET }}"
+            printf "AUTH_GOOGLE_ID=%s\n" "${{ secrets.AUTH_GOOGLE_ID }}"
+            printf "AUTH_GOOGLE_SECRET=%s\n" "${{ secrets.AUTH_GOOGLE_SECRET }}"
+            printf "AUTH_FACEBOOK_ID=%s\n" "${{ secrets.AUTH_FACEBOOK_ID }}"
+            printf "AUTH_FACEBOOK_SECRET=%s\n" "${{ secrets.AUTH_FACEBOOK_SECRET }}"
+            printf "AUTH_MICROSOFT_ENTRA_ID_ID=%s\n" "${{ secrets.AUTH_MICROSOFT_ENTRA_ID_ID }}"
+            printf "AUTH_MICROSOFT_ENTRA_ID_SECRET=%s\n" "${{ secrets.AUTH_MICROSOFT_ENTRA_ID_SECRET }}"
+            printf "AUTH_MICROSOFT_ENTRA_ID_ISSUER=%s\n" "${{ secrets.AUTH_MICROSOFT_ENTRA_ID_ISSUER }}"
+
+            printf "RAZORPAY_KEY_ID=%s\n" "${{ secrets.RAZORPAY_KEY_ID }}"
+            printf "RAZORPAY_KEY_SECRET=%s\n" "${{ secrets.RAZORPAY_KEY_SECRET }}"
+            printf "RAZORPAY_WEBHOOK_SECRET=%s\n" "${{ secrets.RAZORPAY_WEBHOOK_SECRET }}"
+
+            printf "S3_ACCESS_KEY_ID=%s\n" "${{ secrets.S3_ACCESS_KEY_ID }}"
+            printf "S3_SECRET_ACCESS_KEY=%s\n" "${{ secrets.S3_SECRET_ACCESS_KEY }}"
+            printf "S3_REGION=%s\n" "${{ secrets.S3_REGION }}"
+            printf "S3_ENDPOINT=%s\n" "${{ secrets.S3_ENDPOINT }}"
+            printf "S3_BUCKET_NAME=%s\n" "${{ secrets.S3_BUCKET_NAME }}"
           } >> .env
 
       - name: Configure AWS Credentials
@@ -92,11 +112,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      # ⚠️ REMOVE in production
       - name: Show .env
         run: cat .env
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, Tag & Push Docker Image
