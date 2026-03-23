@@ -111,7 +111,7 @@ jobs:
       - name: Build, Tag & Push Docker Image
         env:
           REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          REPOSITORY: prod-meradhan-ui
+          REPOSITORY: prod-fe
           IMAGE_TAG: latest
         run: |
           docker build -f frontendDockerfile -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
